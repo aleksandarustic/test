@@ -1,0 +1,32 @@
+.app-wrapper {
+    background-color: var(--color-grey);
+    box-shadow: var(--shadow-dark);
+    min-height: 93vh;
+
+    @media only screen and (max-width:$fullhd) {
+        margin: 0;
+        max-width: 100%;
+        width: 100%;
+    }
+}
+
+.fixed-section {
+    max-width: $desktop;
+    margin: 0 auto;
+}
+
+.header {
+    .navbar {
+        background-color: #fff;
+        border-bottom: var(--color-grey);
+    }
+}
+
+.app-content {
+    // display: flex;
+    // padding: 1.5rem 1.5rem;
+
+    @media only screen and (max-width:$desktop) {
+        flex-direction: column;
+    }
+}

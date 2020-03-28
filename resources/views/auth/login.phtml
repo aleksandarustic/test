@@ -1,0 +1,50 @@
+<?php $this->start('head'); ?>
+<?php $this->end() ?>
+
+<?php $this->start('body') ?>
+
+<section class="section fixed-section">
+
+    <div class="products__item card">
+
+        <div class="card-content">
+            <p class="title is-4">Login</p>
+
+            <div class="content">
+                <form action="<?= BASE_URL . '/auth/login' ?>" method="post">
+
+                    <div class="field">
+                        <label class="label">Username</label>
+                        <div class="control">
+                            <input class="input <?= \Lib\Session::hasError('username') ? 'is-danger' : '' ?>" name="username" type="text" placeholder="Enter your username" value="">
+                        </div>
+                        <? if (\Lib\Session::hasError('username')) : ?>
+                            <p class="help is-danger"><?= \Lib\Session::getErrors('username')[0] ?></p>
+                        <? endif; ?>
+                    </div>
+                    <div class="field">
+                        <label class="label">Password</label>
+                        <div class="control">
+                            <input class="input <?= \Lib\Session::hasError('password') ? 'is-danger' : '' ?>" name="password" type="password" placeholder="Enter your password" value="">
+                        </div>
+                        <? if (\Lib\Session::hasError('password')) : ?>
+                            <p class="help is-danger"><?= \Lib\Session::getErrors('password')[0] ?></p>
+                        <? endif; ?>
+                    </div>
+
+                    <div class="field">
+                        <div class="control is-expanded">
+                            <button class="button is-primary is-fullwidth">
+                                Sign In
+                            </button>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<?php $this->end() ?>

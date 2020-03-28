@@ -1,0 +1,19 @@
+{
+    "name": "test/catalog",
+    "description": "Catalog",
+    "type": "project",
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/",
+            "Lib\\": "lib/"
+        },
+        "classmap": []
+    },
+    "authors": [
+        {
+            "name": "aleksandar ustić",
+            "email": "aleksandarustic2@gmail.com"
+        }
+    ]
+}

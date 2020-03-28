@@ -1,0 +1,56 @@
+<?php
+
+use Lib\Session;
+
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><?= $this->getSiteTitle() ?></title>
+    <link rel="stylesheet" href="<?= asset('css/style.css') ?>">
+
+    <?= $this->content('head') ?>
+
+</head>
+
+<body>
+    <div class="container app-wrapper">
+        <header class="header">
+            <?php include_once VIEW_PATH . 'layouts/parts/_header.phtml' ?>
+        </header>
+
+        <div class="app-content">
+            
+            <?php if (Session::exists('messages')) : ?>
+
+                <section class="section fixed-section">
+
+                    <?php foreach (Session::getMessages() as $key => $value) : ?>
+
+                        <article class="message is-<?= $key ?>">
+                            <div class="message-header">
+                                <p><?= ucfirst($key) ?></p>
+                                <button class="delete" aria-label="delete"></button>
+                            </div>
+                            <div class="message-body">
+                                <?= $value ?>
+                            </div>
+                        </article>
+                    <?php endforeach; ?>
+                </section>
+
+                <?php Session::delete('messages')  ?>
+
+            <?php endif;  ?>
+
+
+            <?= $this->content('body') ?>
+        </div>
+    </div>
+</body>
+
+</html>

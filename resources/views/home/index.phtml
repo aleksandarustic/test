@@ -1,0 +1,114 @@
+<?php
+
+use Lib\Session;
+
+?>
+
+
+<?php $this->start('head'); ?>
+<?php $this->end() ?>
+
+<?php $this->start('body') ?>
+
+<section class="section fixed-section">
+
+    <h1 class="title has-text-centered">Citrus Products</h1>
+
+    <div class="products">
+        <div class="columns is-multiline">
+            <?php foreach ($this->item('products') as $key => $value) : ?>
+                <div class="column is-one-third">
+                    <div class="products__item card">
+                        <div class="card-image">
+                            <figure class="image is-5by3">
+                                <img src="<?= asset('img/' . $value->image) ?>" alt="Placeholder image">
+                            </figure>
+                        </div>
+                        <div class="card-content">
+                            <p class="title is-4"><?= $value->title ?></p>
+
+                            <div class="content">
+                                <?= $value->description ?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+        </div>
+    </div>
+</section>
+
+<section class="section fixed-section" id="comment-section">
+    <h1 class="title has-text-centered">Comments</h1>
+    <?php if ($this->item('comments')) : ?>
+        <?php foreach ($this->item('comments') as $key => $value) : ?>
+            <div class="box comment">
+                <div class="comment__header">
+                    <p class="title is-marginless"> <?= $value->name ?></p>
+                    <time datetime="2016-1-1"><?= $value->created_at ?></time>
+                </div>
+                <p class="subtitle"> <?= $value->email ?></p>
+
+                <div class="content">
+                    <?= $value->text ?></p>
+                </div>
+
+            </div>
+        <?php endforeach; ?>
+    <?php else : ?>
+        <h1 class="sub-title has-text-centered">There is no comment</h1>
+
+    <?php endif; ?>
+
+
+</section>
+
+<section class="section fixed-section">
+
+
+    <form action="<?= BASE_URL . '/home/comment' ?>" method="post" id="comment-form">
+        <div class="field">
+            <div class="field-body">
+                <div class="field">
+                    <label class="label">Name</label>
+                    <div class="control ">
+                        <input class="input <?= Session::hasError('name') ? 'is-danger' : '' ?>" type=" text" placeholder="Name" value="" name="name">
+                    </div>
+                    <? if (Session::hasError('name')) : ?>
+                        <p class="help is-danger"><?= Session::getErrors('name')[0] ?></p>
+                    <? endif; ?>
+                </div>
+                <div class="field">
+                    <label class="label">Email</label>
+                    <div class="control is-expanded">
+                        <input class="input <?= Session::hasError('email') ? 'is-danger' : '' ?>" type="email" placeholder="Email" value="" name="email">
+                    </div>
+                    <? if (Session::hasError('email')) : ?>
+                        <p class="help is-danger"><?= Session::getErrors('email')[0] ?></p>
+                    <? endif; ?>
+                </div>
+            </div>
+        </div>
+
+        <div class="field">
+            <div class="control">
+                <textarea class="textarea <?= Session::hasError('text') ? 'is-danger' : '' ?>" placeholder="Comment Text" name="text"></textarea>
+            </div>
+            <? if (Session::hasError('text')) : ?>
+                <p class="help is-danger"><?= Session::getErrors('text')[0] ?></p>
+            <? endif; ?>
+        </div>
+
+        <div class="field">
+            <div class="control is-expanded">
+                <button class="button is-primary is-fullwidth">
+                    Post Comment
+                </button>
+            </div>
+        </div>
+        <?php Session::delete('errors')  ?>
+    </form>
+</section>
+
+
+<?php $this->end() ?>

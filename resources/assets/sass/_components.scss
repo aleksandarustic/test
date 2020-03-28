@@ -1,0 +1,26 @@
+/////////////////////////////////////
+// LOGO
+
+.logo {
+    height: 3.25rem;
+    margin-left: 2rem;
+}
+
+.products {
+    max-width: $desktop;
+    margin: 0 auto;
+
+    &__item {
+        height: 100%;
+    }
+}
+
+.comment {
+
+    &__header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+}
