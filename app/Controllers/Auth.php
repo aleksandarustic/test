@@ -9,8 +9,16 @@ use Lib\Input;
 use Lib\Router;
 use App\Models\User;
 
+/**
+ * Auth
+ */
 class Auth extends Controller
-{
+{    
+    /**
+     * index: Return login page and check if user is logedin
+     *
+     * @return void
+     */
     public function index()
     {
         \Lib\Auth::checkUnauthenticated();
@@ -19,7 +27,12 @@ class Auth extends Controller
         $this->view->setTitle('Login');
         $this->view->render();
     }
-
+    
+    /**
+     * login: Handle login action
+     *
+     * @return void
+     */
     public function login()
     {
 

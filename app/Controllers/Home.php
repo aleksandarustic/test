@@ -11,10 +11,16 @@ use Lib\Input;
 use Lib\Router;
 use Lib\Session;
 
-
-
+/**
+ * Home Controller
+ */
 class Home extends Controller
-{
+{    
+    /**
+     * index: return catalog
+     *
+     * @return void
+     */
     public function index()
     {
         $products = Product::find(['order' => 'title', 'limit' => 9]);
@@ -24,7 +30,12 @@ class Home extends Controller
         $this->view->setTitle('Catalog');
         $this->view->render();
     }
-
+    
+    /**
+     * comment: handle making coments
+     *
+     * @return void
+     */
     public function comment()
     {
         $validation = new Validate();

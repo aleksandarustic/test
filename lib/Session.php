@@ -2,6 +2,9 @@
 
 namespace Lib;
 
+/**
+ * Session
+ */
 class Session
 {
 
@@ -24,28 +27,52 @@ class Session
      * Destroy: Deletes the session.
      * @access public
      * @return void
-     * @since 1.0.1
      */
     public static function destroy()
     {
         session_destroy();
     }
 
+    /**
+     * exists: Check if session item exists
+     *
+     * @param  mixed $name
+     * @return void
+     */
     public static function exists($name)
     {
         return (isset($_SESSION[$name])) ? true : false;
     }
 
+    /**
+     * get: Get item from session
+     *
+     * @param  mixed $name
+     * @return void
+     */
     public static function get($name)
     {
         return $_SESSION[$name];
     }
 
+    /**
+     * set :Set item in session
+     *
+     * @param  mixed $name
+     * @param  mixed $value
+     * @return void
+     */
     public static function set($name, $value)
     {
         return $_SESSION[$name] = $value;
     }
 
+    /**
+     * delete: delete item from session
+     *
+     * @param  mixed $name
+     * @return void
+     */
     public static function delete($name)
     {
         if (self::exists($name)) {
@@ -53,16 +80,34 @@ class Session
         }
     }
 
+    /**
+     * setMessages: add messages to sessions
+     *
+     * @param  mixed $msg
+     * @return void
+     */
     public static function setMessages($msg)
     {
         self::set('messages', $msg);
     }
 
+    /**
+     * setErrors
+     *
+     * @param  mixed $errors
+     * @return void
+     */
     public static function setErrors($errors)
     {
         self::set('errors', $errors);
     }
 
+    /**
+     * getMessages: get messages from session
+     *
+     * @param  mixed $type
+     * @return void
+     */
     public static function getMessages($type = false)
     {
         if ($type == false) {
@@ -72,11 +117,24 @@ class Session
         }
     }
 
-    public static function hasError($field)
+
+    /**
+     * hasError: Check if session has error
+     *
+     * @param  mixed $field
+     * @return bool
+     */
+    public static function hasError($field): bool
     {
         return isset(self::getErrors()[$field]) ? true : false;
     }
 
+    /**
+     * getErrors : Get error from sessions
+     *
+     * @param  mixed $field
+     * @return void
+     */
     public static function getErrors($field = false)
     {
         if (!self::exists('errors')) return null;

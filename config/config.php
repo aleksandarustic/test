@@ -1,14 +1,12 @@
 <?php
 
 
-/**
- * Project Url
- */
-
+/*
+ENTER YOUR SERVER URL, BASE_URL should be root of your server
+*/
 define('BASE_URL', 'http://catalog.loc');
 
 
-define('SITE_TITLE', 'Catalog');
 /**
  * Database Configuration
  */
@@ -19,7 +17,14 @@ define('DB_DATABASE', 'catalog');
 define('DB_USERNAME', 'root');
 define('DB_PASSWORD', '');
 
+/**
+ * Name of Site
+ */
+define('SITE_TITLE', "Catalog");
 
+/**
+ * Name of user session
+ */
 define('SESSION_USER', "user");
 
 
@@ -29,7 +34,17 @@ define('SESSION_USER', "user");
 
 define('DEFAULT_LAYOUT', 'default');
 
-
+/** 
+ * Path to asset folder
+ */
 define('ASSET_URL',  '/public/');
 
+/** 
+ * Path to views folder
+ */
 define('VIEW_PATH', '../resources/views/');
+
+/** 
+ * Error reporting level .
+ */
+define('ERROR_REPORTING', 0);

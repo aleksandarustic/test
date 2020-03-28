@@ -4,6 +4,9 @@ namespace App\Models;
 
 use Lib\Base\Model;
 
+/**
+ * Product
+ */
 class Product extends Model
 {
     /**

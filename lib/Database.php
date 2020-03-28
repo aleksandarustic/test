@@ -6,26 +6,62 @@ use \PDO;
 use \PDOException;
 
 
+/**
+ * Database Wrapper
+ */
 final class Database
 {
     private static $instance;
 
+    /**
+     * connection: database connection
+     *
+     * @var mixed
+     */
     private $connection;
 
+    /**
+     * _query: current query
+     *
+     * @var mixed
+     */
     private $_query;
+
+    /**
+     * _count : row affected
+     *
+     * @var mixed
+     */
     private $_count;
+
+    /**
+     * _result: result of query opperations
+     *
+     * @var mixed
+     */
     private $_result;
+
+    /**
+     * _error:  database error
+     *
+     * @var mixed
+     */
     private $_error;
+
+    /**
+     * _last_id: last affected id 
+     *
+     * @var integer
+     */
     private $_last_id;
 
 
     /**
-     * __construct
+     * getInstance: Check if instance exists and return instance of database 
      *
-     * @return void
+     * @return Database
      */
-
-    public static function getInstance()
+    public static function getInstance(): Database
     {
         if (!isset(self::$instance)) {
             self::$instance = new self();
@@ -33,6 +69,11 @@ final class Database
         return self::$instance;
     }
 
+    /**
+     * __construct:  Initialize database connection
+     *
+     * @return void
+     */
     private function __construct()
     {
         try {
@@ -47,7 +88,14 @@ final class Database
         }
     }
 
-    public function query($sql, $params = [])
+    /**
+     * query: Main function for opperating with dataabase query
+     *
+     * @param  mixed $sql
+     * @param  mixed $params
+     * @return Database
+     */
+    public function query($sql, $params = []): Database
     {
         $this->_error = false;
 
@@ -74,6 +122,13 @@ final class Database
         return $this;
     }
 
+    /**
+     * read: Abbstraction for select method
+     *
+     * @param  mixed $table
+     * @param  mixed $params
+     * @return void
+     */
     protected function read($table, $params)
     {
         $conditionString = '';
@@ -126,6 +181,13 @@ final class Database
         return false;
     }
 
+    /**
+     * find: Find item in database
+     *
+     * @param  mixed $table
+     * @param  mixed $params
+     * @return void
+     */
     public function find($table, $params = [])
     {
         if ($this->read($table, $params)) {
@@ -135,6 +197,13 @@ final class Database
     }
 
 
+    /**
+     * findFirst: return only first from record list
+     *
+     * @param  mixed $table
+     * @param  mixed $params
+     * @return void
+     */
     public function findFirst($table, $params = [])
     {
         if ($this->read($table, $params)) {
@@ -145,7 +214,7 @@ final class Database
 
 
     /**
-     * insert
+     * insert: insert item in database
      *
      * @param  mixed $table
      * @param  mixed $fields
@@ -175,6 +244,14 @@ final class Database
         }
     }
 
+    /**
+     * update: update item in database
+     *
+     * @param  mixed $table
+     * @param  mixed $id
+     * @param  mixed $fields
+     * @return void
+     */
     public function update($table, $id, $fields = [])
     {
         $fieldString = '';
@@ -194,6 +271,13 @@ final class Database
         return false;
     }
 
+    /**
+     * delete: delete item from database
+     *
+     * @param  mixed $table
+     * @param  mixed $id
+     * @return void
+     */
     public function delete($table, $id)
     {
         $sql = "DELETE FROM {$table} WHERE id = {$id}";
@@ -202,33 +286,64 @@ final class Database
         }
         return false;
     }
-
+    
+    /**
+     * first
+     *
+     * @return void
+     */
     public function first()
     {
         return (!empty($this->_result)) ? $this->_result[0] : [];
     }
-
+    
+    /**
+     * count
+     *
+     * @return void
+     */
     public function count()
     {
         return $this->_count;
     }
 
-
+    
+    /**
+     * result
+     *
+     * @return void
+     */
     public function result()
     {
         return $this->_result;
     }
-
+    
+    /**
+     * lastId
+     *
+     * @return void
+     */
     public function lastId()
     {
         return $this->_last_id;
     }
-
+    
+    /**
+     * error
+     *
+     * @return void
+     */
     public function error()
     {
         return $this->_error;
     }
-
+    
+    /**
+     * getColumns
+     *
+     * @param  mixed $table
+     * @return void
+     */
     public function getColumns($table)
     {
         return $this->query("SHOW COLUMNS FROM {$table}")->result();

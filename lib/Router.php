@@ -2,13 +2,46 @@
 
 namespace Lib;
 
+/**
+ * Router
+ */
+
 class Router
 {
+    /**
+     * view
+     *
+     * @var string
+     */
     protected static $view;
+
+    /**
+     * controller
+     *
+     * @var string
+     */
     protected static $controller = 'Home';
+
+    /**
+     * action
+     *
+     * @var string
+     */
     protected static $action = 'index';
+
+    /**
+     * params
+     *
+     * @var array
+     */
     protected static $params = [];
 
+    /**
+     * Parse Url and call requierd controller 
+     *
+     * @param  mixed $url
+     * @return void
+     */
     public static function route($url)
     {
 
@@ -33,6 +66,12 @@ class Router
         }
     }
 
+    /**
+     * Redirect
+     *
+     * @param  mixed $url
+     * @return void
+     */
     public static function redirect($url)
     {
         if (!headers_sent()) {
